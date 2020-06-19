@@ -7,60 +7,62 @@ package cs1302.shapes;
  * diameter. Half of this length is called the radius, denoting the distance from the focul
  * point to any point on the curve.
  */
-public class Circle extends Ellipse {
+public class Circle {
 
-    /**
-     * Constructs a {@link Circle} object with the specified radius length.
-     *
-     * @param radius the radius of
-     */
-    public Circle(double radius) {
-        /* A circle is the same as an ellipse where the semi-major and semi-minor axis lengths are
-         * equal.
-         */
-        super(radius, radius);
+    private string name;
+	
+	public void setName(String name) {
+		
+        if (name == null) throw new NullPointerException("name cannot be null");
+        else if (name.isEmpty()) throw new IllegalArgumentException("name cannot be an empty string");
+        else this.name = name;
+        
+    }
+	
+	public String getName() {
+        return name;
+    }
+
+    /** Length of the semi-major axis. */
+    private double a;
+
+    /** Length of the semi-minor axis. */
+    private double b;
+	
+	public Ellipse(double radius) {
+		
         setName("Circle");
-    } // Circle
+        this.a = radius;
+        this.b = radius;
+		
+    }
+	
+	public double getSemiMajorAxisLength() {
+        return a;
+    }
+	
+    public double getSemiMinorAxisLength() {
+        return b;
+    }
 
-    /**
-     * Returns the exact perimeter length of this {@link Circle}. This method is implemented by
-     * calling the {@link #getCircumference()} method of this {@code Circle}.
-     *
-     * @return the perimeter of this {@code Circle}
-     */
-    @Override
+    public double getArea() {
+        return Math.PI * a * b;
+    }
+	
     public double getPerimeter() {
         return getCircumference();
-    } // getPerimeter
-
-    /**
-     * Returns the circumference of this {@code Circle}.
-     *
-     * @return the circumference of this {@code Circle}
-     */
+    }
+	
     public double getCircumference() {
         return Math.PI * getDiameter();
-    } // getCircumference
-
-    /**
-     * Returns the diameter of this {@code Circle}.
-     *
-     * @return the diameter of this {@code Circle}
-     */
+    }
+	
     public double getDiameter() {
         return 2.0 * getRadius();
-    } // getDiameter
-
-
-    /**
-     * Returns the radius of this {@code Circle}.
-     *
-     * @return the radius of this {@code Circle}
-     */
+    }
+	
     public double getRadius() {
-        /* The radius value of a circle is the same as its  semi-major axis length.
-         */
         return getSemiMajorAxisLength();
-    } // getRadius
+    }
 
-} // Circle
+}
